@@ -24,7 +24,8 @@
   --card-radius: 24px;
   --card-shadow: 0 8px 32px rgba(10, 20, 60, 0.18);
   --header-h: 60px;
-  --section-gap: 104px;
+  --section-gap: clamp(72px, 20vw, 104px);
+  --card-pad-x: 20px;
 
   --font-en: "Archivo", sans-serif;
   --font-ja: "Noto Sans JP", sans-serif;
@@ -47,6 +48,8 @@ body {
   font-family: var(--font-ja);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
+  line-break: strict; /* 行頭に小書き文字・約物を置かない */
+  overflow-wrap: anywhere;
   overflow-x: hidden;
 }
 body.is-menu-open { overflow: hidden; }
@@ -191,36 +194,52 @@ a:hover { color: var(--blue-link-hover); }
 .section {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 .section-head {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 0 8px;
+  gap: 8px;
+  padding: 0 4px;
   color: var(--white);
 }
 .section-en {
   font-family: var(--font-en);
   font-weight: 900;
-  font-size: 44px;
+  font-size: clamp(38px, 11.5vw, 44px);
   line-height: 1;
+}
+
+/* 和文見出し：約物を詰め（palt）、文節で改行して行長をそろえる */
+.hero-catch,
+.section-ja,
+.service-title,
+.feature-title,
+.order-title {
+  font-feature-settings: "palt";
+  word-break: auto-phrase;
+  text-wrap: balance;
 }
 .section-ja {
   font-weight: 700;
-  font-size: 20px;
-  line-height: 1.6;
+  font-size: clamp(18px, 5.2vw, 20px);
+  line-height: 1.55;
   letter-spacing: 0.06em;
 }
 
-.text {
-  font-size: 15px;
-  line-height: 1.95;
-  letter-spacing: 0.05em;
-  color: var(--text);
+/* 和文本文：両端揃えで行末のガタつきをなくす */
+.text,
+.order-text {
+  text-align: justify;
   text-wrap: pretty;
 }
-.text--tight { line-height: 1.9; }
+.text {
+  font-size: 15px;
+  line-height: 1.85;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+.text--tight { line-height: 1.8; }
 
 .num {
   font-family: var(--font-en);
@@ -229,7 +248,7 @@ a:hover { color: var(--blue-link-hover); }
   color: var(--blue);
 }
 .num--md { font-size: 36px; }
-.num--lg { font-size: 52px; }
+.num--lg { font-size: 48px; }
 
 /* 画像プレースホルダー（本番画像に差し替え） */
 .ph {
@@ -260,13 +279,13 @@ a:hover { color: var(--blue-link-hover); }
 .hero-body {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 32px 24px 36px;
+  gap: 16px;
+  padding: 28px var(--card-pad-x) 32px;
 }
 .hero-en {
   font-family: var(--font-en);
   font-weight: 900;
-  font-size: 38px;
+  font-size: clamp(32px, 10vw, 40px);
   line-height: 0.98;
   letter-spacing: -0.01em;
   background: linear-gradient(120deg, oklch(0.3 0.13 262), oklch(0.55 0.2 252) 60%, oklch(0.7 0.14 225));
@@ -276,9 +295,9 @@ a:hover { color: var(--blue-link-hover); }
 }
 .hero-catch {
   font-weight: 700;
-  font-size: 22px;
-  line-height: 1.55;
-  letter-spacing: 0.06em;
+  font-size: clamp(20px, 6vw, 24px);
+  line-height: 1.5;
+  letter-spacing: 0.05em;
   color: var(--ink);
 }
 
@@ -288,26 +307,24 @@ a:hover { color: var(--blue-link-hover); }
 .business {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 8px 24px 28px;
+  padding: 4px var(--card-pad-x) var(--card-pad-x);
 }
 .services {
   display: flex;
   flex-direction: column;
-  gap: 8px;
 }
 .service {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 24px 0 28px;
+  gap: 10px;
+  padding: 20px 0 24px;
   border-bottom: 1px solid var(--line);
 }
 .service-head {
   display: flex;
   align-items: baseline;
-  gap: 12px;
-  padding-top: 8px;
+  gap: 10px;
+  padding-top: 6px;
 }
 .service-title {
   font-weight: 700;
@@ -322,11 +339,11 @@ a:hover { color: var(--blue-link-hover); }
   color: var(--blue-soft);
 }
 .order {
-  margin-top: 20px;
+  margin-top: 24px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 22px 20px;
+  gap: 6px;
+  padding: 20px 18px;
   border-radius: 16px;
   background: var(--blue-tint);
 }
@@ -345,7 +362,7 @@ a:hover { color: var(--blue-link-hover); }
 }
 .order-text {
   font-size: 14px;
-  line-height: 1.85;
+  line-height: 1.8;
   letter-spacing: 0.04em;
   color: var(--text);
 }
@@ -366,13 +383,13 @@ a:hover { color: var(--blue-link-hover); }
 .feature-body {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 24px 24px 32px;
+  gap: 10px;
+  padding: 24px var(--card-pad-x) 28px;
 }
 .feature-title {
   font-weight: 700;
   font-size: 19px;
-  line-height: 1.55;
+  line-height: 1.5;
   letter-spacing: 0.05em;
   color: var(--ink);
 }
@@ -380,12 +397,12 @@ a:hover { color: var(--blue-link-hover); }
 /* --------------------------------------------------------------------------
    ④ Company
    -------------------------------------------------------------------------- */
-.company { padding: 8px 24px 16px; }
+.company { padding: 4px var(--card-pad-x) 8px; }
 .company-row {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 18px 0;
+  gap: 2px;
+  padding: 16px 0;
   border-bottom: 1px solid var(--line);
 }
 .company-row:last-child { border-bottom: none; }
@@ -397,7 +414,7 @@ a:hover { color: var(--blue-link-hover); }
 }
 .company-row dd {
   font-size: 15px;
-  line-height: 1.85;
+  line-height: 1.75;
   letter-spacing: 0.04em;
   color: var(--ink);
 }
@@ -422,8 +439,8 @@ a:hover { color: var(--blue-link-hover); }
 .contact {
   display: flex;
   flex-direction: column;
-  gap: 28px;
-  padding: 32px 24px;
+  gap: 24px;
+  padding: 28px var(--card-pad-x);
 }
 .contact-actions {
   display: flex;
