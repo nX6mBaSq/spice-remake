@@ -27,24 +27,8 @@
 <div class="bg" aria-hidden="true"></div>
 
 <header class="header">
-  <a class="logo" href="#top" aria-label="SP!CE WORKS トップへ">SP!CE WORKS</a>
-  <button class="menu-btn" type="button" aria-controls="global-nav" aria-expanded="false" aria-label="メニューを開く">
-    <span></span><span></span>
-  </button>
+  <p class="logo">SP!CE WORKS</p>
 </header>
-
-<nav class="nav" id="global-nav" aria-label="グローバルナビゲーション" hidden>
-  <ul>
-    <li><a href="#business"><span class="nav-en">BUSINESS</span><span class="nav-ja">事業内容</span></a></li>
-    <li><a href="#features"><span class="nav-en">FEATURES</span><span class="nav-ja">私たちの特長</span></a></li>
-    <li><a href="#company"><span class="nav-en">COMPANY</span><span class="nav-ja">会社概要</span></a></li>
-    <li><a href="#contact"><span class="nav-en">CONTACT</span><span class="nav-ja">お問い合わせ</span></a></li>
-  </ul>
-  <div class="nav-cta">
-    <!-- TODO: メールアドレスは公開前に本番用へ差し替え -->
-    <a class="btn btn--primary" href="mailto:info@example.com">メールで問い合わせる</a>
-  </div>
-</nav>
 
 <main class="main" id="top">
 
@@ -177,5 +161,11 @@
   <span class="footer-logo">SP!CE WORKS</span>
   <small class="footer-copy">© 2026 SP!CE WORKS</small>
 </footer>
+
+<!-- 追従CTA：ファーストビューを過ぎたら表示、お問い合わせ以降は非表示 -->
+<div class="float-cta" id="float-cta">
+  <!-- TODO: メールアドレスは公開前に本番用へ差し替え -->
+  <a class="btn btn--primary" href="mailto:info@example.com">メールで問い合わせる</a>
+</div>
 </body>
 </html>
