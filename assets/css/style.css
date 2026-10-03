@@ -147,7 +147,7 @@ a:hover { color: var(--blue-link-hover); }
   overflow-y: auto;
 }
 .nav[hidden] { display: none; }
-.nav a {
+.nav li a {
   min-height: 64px;
   display: flex;
   align-items: center;
@@ -165,6 +165,9 @@ a:hover { color: var(--blue-link-hover); }
   font-size: 12px;
   letter-spacing: 0.06em;
   color: var(--blue-link);
+}
+.nav-cta {
+  margin-top: 32px;
 }
 
 /* --------------------------------------------------------------------------
