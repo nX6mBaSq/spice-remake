@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#e8eaee;font-family:"Noto Sans JP",sans-serif;color:#0f1a33;-webkit-font-smoothing:antialiased}
+a{color:oklch(0.5 0.18 255);text-decoration:underline}
+a:hover{color:oklch(0.4 0.18 258)}
+</style>
+</helmet>
+
+<div style="display:flex;flex-wrap:wrap;gap:64px;align-items:flex-start;padding:56px;">
+
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div style="display:flex;gap:8px;align-items:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:#4a5568;">
+      <span style="background:#0f1a33;color:#fff;padding:2px 8px;border-radius:4px;">A</span>
+      <span>SP / トップ（375px）</span>
+    </div>
+
+    <div data-screen-label="SP Top" style="width:375px;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(15,26,51,0.25);">
+      <div style="position:absolute;inset:0;background:{{ bg }};"></div>
+      <div style="position:absolute;inset:0;opacity:0.18;mix-blend-mode:overlay;background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>&quot;);"></div>
+
+      <div style="position:sticky;top:0;z-index:5;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 16px 0 20px;background:rgba(255,255,255,0.9);backdrop-filter:blur(12px);">
+        <span style="font-family:Archivo,sans-serif;font-weight:900;font-size:18px;letter-spacing:0.02em;color:#0f1a33;">SP!CE WORKS</span>
+        <div onClick="{{ toggleMenu }}" style="width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;cursor:pointer;">
+          <span style="width:22px;height:2px;border-radius:1px;background:#0f1a33;"></span>
+          <span style="width:22px;height:2px;border-radius:1px;background:#0f1a33;"></span>
+        </div>
+      </div>
+
+      <div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:104px;padding:24px 16px 0;">
+
+        <div style="background:#fff;border-radius:24px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 32px rgba(10,20,60,0.18);">
+          <div style="aspect-ratio:4/3;background:linear-gradient(150deg,oklch(0.9 0.04 240),oklch(0.78 0.09 235));display:flex;align-items:flex-end;padding:16px;box-sizing:border-box;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:oklch(0.35 0.1 255);background:rgba(255,255,255,0.7);padding:3px 8px;border-radius:4px;">HERO IMAGE 4:3</span>
+          </div>
+          <div style="padding:32px 24px 36px;display:flex;flex-direction:column;gap:20px;">
+            <div style="font-family:Archivo,sans-serif;font-weight:900;font-size:38px;line-height:0.98;letter-spacing:-0.01em;background:linear-gradient(120deg,oklch(0.3 0.13 262),oklch(0.55 0.2 252) 60%,oklch(0.7 0.14 225));-webkit-background-clip:text;background-clip:text;color:transparent;">EXTERNAL AI CREATIVE DIVISION.</div>
+            <div style="font-weight:700;font-size:22px;line-height:1.55;letter-spacing:0.06em;color:#0f1a33;">AIデザインに強い社員を、<br>採用せずに。</div>
+            <p style="margin:0;font-size:15px;line-height:1.95;letter-spacing:0.05em;color:#3d4a63;text-wrap:pretty;">SP!CE WORKSは、生成AIを使いこなす現役デザイナーが、貴社の「外付けAIクリエイティブ部門」として動くデザイン事務所です。画像・映像・Web制作を、必要な時に必要なだけお任せいただけます。</p>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:20px;">
+          <div style="display:flex;flex-direction:column;gap:10px;padding:0 8px;">
+            <div style="font-family:Archivo,sans-serif;font-weight:900;font-size:44px;line-height:1;color:#fff;">BUSINESS</div>
+            <div style="font-weight:700;font-size:20px;line-height:1.6;letter-spacing:0.06em;color:#fff;">AIを使いこなす制作チームを、<br>貴社の一部に。</div>
+          </div>
+          <div style="background:#fff;border-radius:24px;padding:8px 24px 28px;display:flex;flex-direction:column;gap:8px;box-shadow:0 8px 32px rgba(10,20,60,0.18);">
+            <sc-for list="{{ services }}" as="s" hint-placeholder-count="3">
+              <div style="display:flex;flex-direction:column;gap:12px;padding:24px 0 28px;border-bottom:1px solid #e3e8f0;">
+                <div style="aspect-ratio:16/9;border-radius:14px;background:linear-gradient(150deg,oklch(0.92 0.03 240),oklch(0.82 0.07 235));display:flex;align-items:flex-end;padding:12px;box-sizing:border-box;">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:oklch(0.35 0.1 255);background:rgba(255,255,255,0.7);padding:3px 8px;border-radius:4px;">IMAGE 16:9</span>
+                </div>
+                <div style="display:flex;align-items:baseline;gap:12px;padding-top:8px;">
+                  <span style="font-family:Archivo,sans-serif;font-weight:900;font-size:36px;line-height:1;color:oklch(0.55 0.2 252);">{{ s.no }}</span>
+                  <span style="font-weight:700;font-size:18px;letter-spacing:0.05em;color:#0f1a33;">{{ s.title }}</span>
+                </div>
+                <p style="margin:0;font-size:15px;line-height:1.9;letter-spacing:0.05em;color:#3d4a63;">{{ s.body }}</p>
+                <div style="font-size:12px;line-height:1.7;letter-spacing:0.04em;color:oklch(0.45 0.1 255);">{{ s.items }}</div>
+              </div>
+            </sc-for>
+            <div style="margin-top:20px;background:oklch(0.96 0.02 240);border-radius:16px;padding:22px 20px;display:flex;flex-direction:column;gap:8px;">
+              <div style="font-family:Archivo,sans-serif;font-weight:800;font-size:12px;letter-spacing:0.14em;color:oklch(0.5 0.18 255);">HOW TO ORDER</div>
+              <div style="font-weight:700;font-size:17px;letter-spacing:0.05em;color:#0f1a33;">1点からご依頼いただけます</div>
+              <p style="margin:0;font-size:14px;line-height:1.85;letter-spacing:0.04em;color:#3d4a63;">社内のデザイナーに頼むように、必要な時に1点からご依頼いただけます。</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:20px;">
+          <div style="display:flex;flex-direction:column;gap:10px;padding:0 8px;">
+            <div style="font-family:Archivo,sans-serif;font-weight:900;font-size:44px;line-height:1;color:#fff;">FEATURES</div>
+            <div style="font-weight:700;font-size:20px;letter-spacing:0.06em;color:#fff;">私たちの特長</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <sc-for list="{{ features }}" as="f" hint-placeholder-count="3">
+              <div style="background:#fff;border-radius:24px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 32px rgba(10,20,60,0.18);">
+                <div style="aspect-ratio:4/3;background:linear-gradient(150deg,oklch(0.9 0.04 240),oklch(0.76 0.1 232));display:flex;align-items:flex-end;padding:16px;box-sizing:border-box;">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:oklch(0.35 0.1 255);background:rgba(255,255,255,0.7);padding:3px 8px;border-radius:4px;">GRAPHIC 4:3</span>
+                </div>
+                <div style="padding:24px 24px 32px;display:flex;flex-direction:column;gap:12px;">
+                  <span style="font-family:Archivo,sans-serif;font-weight:900;font-size:52px;line-height:1;color:oklch(0.55 0.2 252);">{{ f.no }}</span>
+                  <div style="font-weight:700;font-size:19px;line-height:1.55;letter-spacing:0.05em;color:#0f1a33;">{{ f.title }}</div>
+                  <p style="margin:0;font-size:15px;line-height:1.95;letter-spacing:0.05em;color:#3d4a63;text-wrap:pretty;">{{ f.body }}</p>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:20px;">
+          <div style="display:flex;flex-direction:column;gap:10px;padding:0 8px;">
+            <div style="font-family:Archivo,sans-serif;font-weight:900;font-size:44px;line-height:1;color:#fff;">COMPANY</div>
+            <div style="font-weight:700;font-size:20px;letter-spacing:0.06em;color:#fff;">会社概要</div>
+          </div>
+          <div style="background:#fff;border-radius:24px;padding:8px 24px 16px;display:flex;flex-direction:column;box-shadow:0 8px 32px rgba(10,20,60,0.18);">
+            <sc-for list="{{ company }}" as="c" hint-placeholder-count="8">
+              <div style="display:flex;flex-direction:column;gap:4px;padding:18px 0;border-bottom:{{ c.border }};">
+                <div style="font-size:12px;font-weight:700;letter-spacing:0.1em;color:oklch(0.5 0.18 255);">{{ c.k }}</div>
+                <div style="font-size:15px;line-height:1.85;letter-spacing:0.04em;color:#0f1a33;">{{ c.v }}</div>
+                <sc-if value="{{ c.map }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;align-items:center;gap:6px;padding-top:6px;font-size:13px;font-weight:700;color:oklch(0.5 0.18 255);">
+                    <span style="text-decoration:underline;text-underline-offset:3px;">Googleマップで見る</span><span>↗</span>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:20px;">
+          <div style="display:flex;flex-direction:column;gap:10px;padding:0 8px;">
+            <div style="font-family:Archivo,sans-serif;font-weight:900;font-size:44px;line-height:1;color:#fff;">CONTACT</div>
+            <div style="font-weight:700;font-size:20px;letter-spacing:0.06em;color:#fff;">お問い合わせ</div>
+          </div>
+          <div style="background:#fff;border-radius:24px;padding:32px 24px;display:flex;flex-direction:column;gap:28px;box-shadow:0 8px 32px rgba(10,20,60,0.18);">
+            <p style="margin:0;font-size:15px;line-height:1.95;letter-spacing:0.05em;color:#3d4a63;text-wrap:pretty;">「AIでこんなことはできる？」という段階のご相談も歓迎です。公式LINEまたはメールにてお気軽にご連絡ください。</p>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div style="height:58px;border-radius:29px;background:linear-gradient(110deg,oklch(0.42 0.19 262),oklch(0.56 0.2 250) 55%,oklch(0.7 0.14 225));color:#fff;font-weight:700;font-size:16px;letter-spacing:0.06em;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px oklch(0.5 0.2 255 / 0.35);cursor:pointer;" style-hover="filter:brightness(1.08);">公式LINEで相談する</div>
+              <div style="height:58px;border-radius:29px;background:#fff;border:2px solid oklch(0.5 0.19 255);color:oklch(0.42 0.19 258);font-weight:700;font-size:16px;letter-spacing:0.06em;display:flex;align-items:center;justify-content:center;cursor:pointer;" style-hover="background:oklch(0.97 0.015 240);">メールで問い合わせる</div>
+              <div style="font-size:13px;color:#5b6780;text-align:center;font-family:'JetBrains Mono',monospace;padding-top:4px;">info@example.com</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0 40px;">
+          <span style="font-family:Archivo,sans-serif;font-weight:900;font-size:18px;color:#fff;">SP!CE WORKS</span>
+          <span style="font-size:11px;letter-spacing:0.06em;color:rgba(255,255,255,0.85);">© 2026 SP!CE WORKS</span>
+        </div>
+      </div>
+
+      <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;top:60px;left:0;right:0;bottom:0;z-index:6;background:rgba(255,255,255,0.97);padding:24px;display:flex;flex-direction:column;">
+          <sc-for list="{{ nav }}" as="n" hint-placeholder-count="4">
+            <div onClick="{{ toggleMenu }}" style="min-height:64px;border-bottom:1px solid #e3e8f0;display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+              <span style="font-family:Archivo,sans-serif;font-weight:900;font-size:24px;color:#0f1a33;">{{ n.en }}</span>
+              <span style="font-size:12px;letter-spacing:0.06em;color:oklch(0.5 0.18 255);">{{ n.ja }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div style="display:flex;gap:8px;align-items:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:#4a5568;">
+      <span style="background:#0f1a33;color:#fff;padding:2px 8px;border-radius:4px;">B</span>
+      <span>SP / メニュー展開時</span>
+    </div>
+    <div data-screen-label="SP Menu" style="width:375px;height:812px;background:#fff;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(15,26,51,0.25);">
+      <div style="height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 16px 0 20px;">
+        <span style="font-family:Archivo,sans-serif;font-weight:900;font-size:18px;color:#0f1a33;">SP!CE WORKS</span>
+        <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;position:relative;">
+          <span style="position:absolute;width:22px;height:2px;border-radius:1px;background:#0f1a33;transform:rotate(45deg);"></span>
+          <span style="position:absolute;width:22px;height:2px;border-radius:1px;background:#0f1a33;transform:rotate(-45deg);"></span>
+        </div>
+      </div>
+      <div style="padding:24px;display:flex;flex-direction:column;">
+        <sc-for list="{{ nav }}" as="n" hint-placeholder-count="4">
+          <div style="min-height:64px;border-bottom:1px solid #e3e8f0;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:Archivo,sans-serif;font-weight:900;font-size:24px;color:#0f1a33;">{{ n.en }}</span>
+            <span style="font-size:12px;letter-spacing:0.06em;color:oklch(0.5 0.18 255);">{{ n.ja }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;bgTone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;濃紺→シアン&quot;,&quot;ブルー均一&quot;,&quot;ディープ&quot;],&quot;default&quot;:&quot;濃紺→シアン&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { menuOpen: false };
+  renderVals() {
+    const tone = this.props.bgTone ?? '濃紺→シアン';
+    const bgs = {
+      '濃紺→シアン': 'linear-gradient(180deg, oklch(0.28 0.11 265) 0%, oklch(0.45 0.19 258) 30%, oklch(0.62 0.16 238) 60%, oklch(0.72 0.12 222) 80%, oklch(0.4 0.17 260) 100%)',
+      'ブルー均一': 'linear-gradient(180deg, oklch(0.5 0.19 256) 0%, oklch(0.58 0.18 248) 50%, oklch(0.48 0.19 258) 100%)',
+      'ディープ': 'linear-gradient(180deg, oklch(0.22 0.08 265) 0%, oklch(0.35 0.15 262) 45%, oklch(0.48 0.19 255) 75%, oklch(0.25 0.1 265) 100%)'
+    };
+    const company = [
+      { k: '屋号', v: 'SP!CE WORKS（スパイスワークス）' },
+      { k: '代表者', v: '一宮 忠士' },
+      { k: '事業内容', v: '生成AIを活用したデザイン・映像・Web制作の受託' },
+      { k: '創業', v: '2026年6月10日' },
+      { k: '所在地', v: '〒530-0001 大阪府大阪市北区梅田1丁目2番2号 大阪駅前第2ビル12-12', map: true },
+      { k: '営業時間', v: '10:00〜19:00' },
+      { k: '定休日', v: '土・日・祝（年末年始、夏季休暇）' },
+      { k: '連絡先', v: 'info@example.com／公式LINE' }
+    ].map((c, i, a) => ({ ...c, border: i === a.length - 1 ? 'none' : '1px solid #e3e8f0' }));
+    return {
+      bg: bgs[tone] || bgs['濃紺→シアン'],
+      menuOpen: this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      nav: [
+        { en: 'BUSINESS', ja: '事業内容' },
+        { en: 'FEATURES', ja: '私たちの特長' },
+        { en: 'COMPANY', ja: '会社概要' },
+        { en: 'CONTACT', ja: 'お問い合わせ' }
+      ],
+      services: [
+        { no: '01', title: 'グラフィックデザイン', body: '生成AIで素材をつくり、プロの手で商用品質へ。', items: 'バナー／SNS画像／チラシ／名刺／営業資料' },
+        { no: '02', title: '動画制作・映像編集', body: 'AI映像生成と編集技術を組み合わせ、SNS広告動画やショート動画をスピーディに。', items: 'SNS広告動画／ショート動画' },
+        { no: '03', title: 'Webサイト・LP制作', body: '構成からデザイン、実装・保守まで。AIツールを活用して短期間で形に。', items: '構成／デザイン／実装／保守' }
+      ],
+      features: [
+        { no: '01', title: '現役デザイナーが手がける', body: '制作を担当するのは、いまも第一線で実務を続けるデザイナー。AIの出力をそのまま納品せず、構図・文字・色をプロの目で整え、商用品質に仕上げます。' },
+        { no: '02', title: '採用より速く、確実に', body: 'AIとデザインの両方に通じた人材は、採用も育成も簡単ではありません。ご依頼いただいたその時から、即戦力として動きます。' },
+        { no: '03', title: '最新ツールの検証は、私たちが', body: '日々進化するAIツールの情報収集と検証は当社が担当。貴社は成果物とノウハウだけを受け取れます。' }
+      ],
+      company
+    };
+  }
+}
+</script>
+</body>
+</html>
