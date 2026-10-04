@@ -3,27 +3,57 @@
    ========================================================================== */
 
 :root {
-  --ink: #0f1a33;
-  --text: #3d4a63;
-  --muted: #5b6780;
-  --line: #e3e8f0;
+  /* ------------------------------------------------------------------------
+     配色
+     色相を 紺 266° → 青 254° → 空色 236° の一本の軸にそろえ、無彩色も紺へ寄せる。
+     ・白文字を載せる色（背景・ボタン）は、白とのコントラスト 4.5:1 以上
+     ・既定値は sRGB の色域内。色域外の色はブラウザごとに丸め方が違い色相がずれるため。
+       P3 ディスプレイでは下の @media で彩度だけ上げる（明度は同じなのでコントラストも同じ）
+     ------------------------------------------------------------------------ */
+
+  /* 無彩色（紺みのグレー） */
+  --ink: oklch(0.22 0.05 265);   /* 見出し・本文の濃色      白地 17.4:1 */
+  --text: oklch(0.41 0.045 262); /* 本文                    白地 8.8:1 */
+  --muted: oklch(0.5 0.04 262);  /* 補足                    白地 6.0:1 */
+  --line: oklch(0.93 0.012 255); /* 罫線 */
   --white: #fff;
 
-  --blue: oklch(0.55 0.2 252);
-  --blue-link: oklch(0.5 0.18 255);
-  --blue-link-hover: oklch(0.4 0.18 258);
-  --blue-soft: oklch(0.45 0.1 255);
-  --blue-tint: oklch(0.96 0.02 240);
+  /* ブランドの青 */
+  --navy-900: oklch(0.27 0.11 266);  /* 背景上端・theme-color */
+  --navy-800: oklch(0.35 0.14 262);  /* 背景下端 */
+  --blue-700: oklch(0.4 0.155 260);  /* 濃い青・ホバー      白地 9.5:1 */
+  --blue-600: oklch(0.48 0.16 257);  /* リンク・ラベル      白地 6.7:1 */
+  --blue-500: oklch(0.54 0.165 254); /* 番号などの主役の青  白地 5.1:1 */
+  --cyan-500: oklch(0.56 0.12 238);  /* グラデーション終端  白地 4.6:1 */
+  --blue-soft: oklch(0.45 0.1 255);  /* 落ち着いた青の文字  白地 7.5:1 */
+  --blue-100: oklch(0.92 0.04 243);  /* 選択範囲 */
+  --blue-50: oklch(0.97 0.015 245);  /* 淡い面・紺地の小さな文字 */
+
+  /* 旧名（既存のクラスから参照） */
+  --blue: var(--blue-500);
+  --blue-link: var(--blue-600);
+  --blue-link-hover: var(--blue-700);
+  --blue-tint: var(--blue-50);
+
+  /* 背景グラデーションの各段。明るい帯でも白文字 4.9:1 を保つ（旧 L0.72 は 2.4:1） */
+  --bg-1: var(--navy-900);
+  --bg-2: oklch(0.42 0.155 259);
+  --bg-3: oklch(0.5 0.128 247);
+  --bg-4: oklch(0.54 0.113 236);
+  --bg-5: var(--navy-800);
 
   /* 背景トーン（デザインの Tweaks: 濃紺→シアン / ブルー均一 / ディープ） */
-  --bg-navy-cyan: linear-gradient(180deg, oklch(0.28 0.11 265) 0%, oklch(0.45 0.19 258) 30%, oklch(0.62 0.16 238) 60%, oklch(0.72 0.12 222) 80%, oklch(0.4 0.17 260) 100%);
-  --bg-blue-flat: linear-gradient(180deg, oklch(0.5 0.19 256) 0%, oklch(0.58 0.18 248) 50%, oklch(0.48 0.19 258) 100%);
-  --bg-deep: linear-gradient(180deg, oklch(0.22 0.08 265) 0%, oklch(0.35 0.15 262) 45%, oklch(0.48 0.19 255) 75%, oklch(0.25 0.1 265) 100%);
+  --bg-navy-cyan: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 30%, var(--bg-3) 60%, var(--bg-4) 80%, var(--bg-5) 100%);
+  --bg-blue-flat: linear-gradient(180deg, oklch(0.48 0.15 256) 0%, oklch(0.53 0.14 248) 50%, oklch(0.46 0.15 258) 100%);
+  --bg-deep: linear-gradient(180deg, oklch(0.22 0.08 265) 0%, var(--navy-800) 45%, var(--blue-600) 75%, oklch(0.25 0.1 265) 100%);
   --bg: var(--bg-navy-cyan);
 
   --card-radius: 24px;
   --media-radius: 14px;
-  --card-shadow: 0 8px 32px rgba(10, 20, 60, 0.18);
+  /* 影は黒でなく背景と同じ紺で落とす。近い影＋遠い影の二層で浮きを自然に */
+  --card-shadow:
+    0 1px 2px oklch(0.2 0.1 262 / 0.12),
+    0 12px 32px oklch(0.2 0.1 262 / 0.22);
   --section-gap: clamp(72px, 20vw, 104px);
   --card-pad-x: 22px; /* 375px 幅で本文が 19 字詰め・字間 ≒0.05em になる値 */
 
@@ -31,6 +61,20 @@
   /* Web フォント読み込み前・失敗時も、OS の上質な和文ゴシックで組む */
   --font-ja: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "YuGothic", "Meiryo", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
+}
+
+/* P3 ディスプレイ（iPhone・Mac など）：同じ明度のまま彩度を上げる */
+@media (color-gamut: p3) {
+  :root {
+    --blue-700: oklch(0.4 0.18 260);
+    --blue-600: oklch(0.48 0.19 257);
+    --blue-500: oklch(0.54 0.2 254);
+    --cyan-500: oklch(0.56 0.15 236);
+    --bg-2: oklch(0.42 0.19 259);
+    --bg-3: oklch(0.5 0.17 247);
+    --bg-4: oklch(0.54 0.15 236);
+    --bg-5: oklch(0.35 0.17 262);
+  }
 }
 
 *,
@@ -45,7 +89,7 @@ html {
 
 body {
   margin: 0;
-  background: oklch(0.28 0.11 265);
+  background: var(--navy-900); /* オーバースクロール時に見える色＝背景上端 */
   font-family: var(--font-ja);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
@@ -64,7 +108,9 @@ ul, ol { list-style: none; }
 a { color: var(--blue-link); text-decoration: underline; }
 a:hover { color: var(--blue-link-hover); }
 
-:focus-visible { outline: 3px solid oklch(0.72 0.12 222); outline-offset: 2px; }
+:focus-visible { outline: 3px solid var(--blue-600); outline-offset: 3px; } /* 白地で 6.7:1 */
+
+::selection { background: var(--blue-100); color: var(--ink); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -323,7 +369,7 @@ a:hover { color: var(--blue-link-hover); }
   line-height: 1;
   letter-spacing: 0.02em;
   color: var(--white);
-  text-shadow: 0 1px 12px rgba(10, 20, 60, 0.35);
+  text-shadow: 0 1px 12px oklch(0.2 0.1 262 / 0.4);
 }
 .hero-body {
   display: flex;
@@ -337,7 +383,7 @@ a:hover { color: var(--blue-link-hover); }
   font-size: clamp(32px, 10vw, 40px);
   line-height: 0.98;
   letter-spacing: -0.01em;
-  background: linear-gradient(120deg, oklch(0.3 0.13 262), oklch(0.55 0.2 252) 60%, oklch(0.7 0.14 225));
+  background: linear-gradient(120deg, var(--navy-900), var(--blue-500) 60%, var(--cyan-500)); /* 終端でも白地 4.6:1 */
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -543,16 +589,17 @@ a:hover { color: var(--blue-link-hover); }
 }
 .btn--primary {
   color: var(--white);
-  background: linear-gradient(110deg, oklch(0.42 0.19 262), oklch(0.56 0.2 250) 55%, oklch(0.7 0.14 225));
-  box-shadow: 0 8px 20px oklch(0.5 0.2 255 / 0.35);
+  /* 白文字が載る範囲はどこでも 4.6:1 以上（旧終端 L0.7 は 2.6:1） */
+  background: linear-gradient(110deg, var(--blue-700), var(--blue-500) 55%, var(--cyan-500));
+  box-shadow: 0 8px 20px color-mix(in oklch, var(--blue-500) 35%, transparent);
 }
 .btn--primary:hover { color: var(--white); filter: brightness(1.08); }
 .btn--secondary {
-  color: oklch(0.42 0.19 258);
+  color: var(--blue-700);
   background: var(--white);
-  border: 2px solid oklch(0.5 0.19 255);
+  border: 2px solid var(--blue-600);
 }
-.btn--secondary:hover { color: oklch(0.42 0.19 258); background: oklch(0.97 0.015 240); }
+.btn--secondary:hover { color: var(--blue-700); background: var(--blue-50); }
 .contact-mail {
   padding-top: 4px;
   font-family: var(--font-mono);
@@ -581,7 +628,7 @@ a:hover { color: var(--blue-link-hover); }
 .footer-copy {
   font-size: 11px;
   letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--blue-50); /* 半透明の白は背景の明るい帯で 4.5:1 を割るので不透明の淡青に */
 }
 
 /* --------------------------------------------------------------------------
