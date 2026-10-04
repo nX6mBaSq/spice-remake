@@ -56,6 +56,10 @@
     0 12px 32px oklch(0.2 0.1 262 / 0.22);
   --section-gap: clamp(72px, 20vw, 104px);
   --card-pad-x: 22px; /* 375px 幅で本文が 19 字詰め・字間 ≒0.05em になる値 */
+  /* カード内の余白の規則（見た目の距離＝行間の半分を除いた文字の上下端から測る）
+     ・文字の端 → カード端：30px
+     ・画像やボタンなど物の縁 → カード端：左右と同じ 22px
+     下の各 padding は、この見た目の距離になるよう半行間ぶんを差し引いた値 */
 
   --font-en: "Archivo", sans-serif;
   /* Web フォント読み込み前・失敗時も、OS の上質な和文ゴシックで組む */
@@ -146,7 +150,7 @@ a:hover { color: var(--blue-link-hover); }
   gap: var(--section-gap);
   max-width: 480px; /* PC版デザイン確定までは SP レイアウトを中央寄せ */
   margin: 0 auto;
-  padding: 16px 16px 0;
+  padding: 16px max(16px, env(safe-area-inset-right)) 0 max(16px, env(safe-area-inset-left));
 }
 
 .card {
@@ -158,13 +162,14 @@ a:hover { color: var(--blue-link-hover); }
 .section {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
+/* 英字＋和文の見出しを一塊にし（間を詰める）、カードとは間を空けてラベルとして読ませる。
+   左端はカードの縁にそろえる（旧 4px 内側は、縁とも本文とも合わない半端な位置だった） */
 .section-head {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 0 4px;
+  gap: 2px;
   color: var(--white);
 }
 .section-en {
@@ -375,7 +380,7 @@ a:hover { color: var(--blue-link-hover); }
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 28px var(--card-pad-x) 32px;
+  padding: 28px var(--card-pad-x) 24px;
 }
 .hero-en {
   font-family: var(--font-en);
@@ -402,7 +407,7 @@ a:hover { color: var(--blue-link-hover); }
 .business {
   display: flex;
   flex-direction: column;
-  padding: 4px var(--card-pad-x) var(--card-pad-x);
+  padding: 2px var(--card-pad-x) 18px; /* 先頭の画像の上端が左右と同じ 22px に */
 }
 .services {
   display: flex;
@@ -497,7 +502,7 @@ a:hover { color: var(--blue-link-hover); }
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 0 var(--card-pad-x) 28px;
+  padding: 0 var(--card-pad-x) 24px;
 }
 .feature .num-tab {
   --tab-r: 20px;
@@ -519,7 +524,7 @@ a:hover { color: var(--blue-link-hover); }
 /* --------------------------------------------------------------------------
    ④ Company
    -------------------------------------------------------------------------- */
-.company { padding: 4px var(--card-pad-x) 8px; }
+.company { padding: 11px var(--card-pad-x) 8px; }
 .company-row {
   display: flex;
   flex-direction: column;
@@ -568,7 +573,7 @@ a:hover { color: var(--blue-link-hover); }
   display: flex;
   flex-direction: column;
   gap: 24px;
-  padding: 28px var(--card-pad-x);
+  padding: 24px var(--card-pad-x) var(--card-pad-x); /* 下端はボタンの縁なので 22px */
 }
 .contact-actions {
   display: flex;
