@@ -56,7 +56,7 @@
       new ResizeObserver(function (entries) {
         var w = entries[0].contentRect.width;
         if (w !== lastWidth) { lastWidth = w; avoidWidows(); }
-      }).observe(document.querySelector('.main'));
+      }).observe(document.querySelector('.bg')); // 画面幅に追従し、本文の組み替えで寸法が変わらない要素を監視する
       // Noto Sans JP はサブセット分割で順次届くので、読み込みのたびに組み直す
       if (document.fonts) {
         document.fonts.ready.then(avoidWidows);
