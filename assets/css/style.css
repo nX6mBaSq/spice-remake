@@ -22,6 +22,7 @@
   --bg: var(--bg-navy-cyan);
 
   --card-radius: 24px;
+  --media-radius: 14px;
   --card-shadow: 0 8px 32px rgba(10, 20, 60, 0.18);
   --section-gap: clamp(72px, 20vw, 104px);
   --card-pad-x: 22px; /* 375px 幅で本文が 19 字詰め・字間 ≒0.05em になる値 */
@@ -210,22 +211,78 @@ a:hover { color: var(--blue-link-hover); }
 .num--md { font-size: 36px; }
 .num--lg { font-size: 48px; }
 
-/* 画像プレースホルダー（本番画像に差し替え） */
-.ph {
+/* --------------------------------------------------------------------------
+   画像枠
+   比率で格を付ける：ヒーロー 4:3 ＞ 特長 3:2 ＞ 事業 16:9。
+   枠の中に <img> を入れるだけで、比率を保ったままトリミングされる。
+   背景のグラデーションは仮置きの見た目を兼ね、本番では読み込み中の下地になる。
+   -------------------------------------------------------------------------- */
+.media {
+  position: relative;
+  overflow: hidden;
   display: flex;
-  align-items: flex-end;
-  padding: 16px;
+  align-items: flex-start;
+  justify-content: flex-end; /* ラベルは右上：左上はロゴ、左下は番号タブが重なるため */
+  padding: 12px;
+  background: linear-gradient(150deg, oklch(0.9 0.04 240), oklch(0.77 0.1 234));
 }
-.ph--hero { aspect-ratio: 4 / 3; background: linear-gradient(150deg, oklch(0.9 0.04 240), oklch(0.78 0.09 235)); }
-.ph--service { aspect-ratio: 16 / 9; padding: 12px; border-radius: 14px; background: linear-gradient(150deg, oklch(0.92 0.03 240), oklch(0.82 0.07 235)); }
-.ph--feature { aspect-ratio: 4 / 3; background: linear-gradient(150deg, oklch(0.9 0.04 240), oklch(0.76 0.1 232)); }
-.ph-label {
+.media > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--focus, 50% 50%); /* 主題の位置は style="--focus: 70% 40%" で調整 */
+}
+/* 白いカードに明るい写真が溶けないよう、ごく薄い内側の縁を引く */
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px oklch(0.25 0.05 260 / 0.07);
+  pointer-events: none;
+}
+.media--hero { aspect-ratio: 4 / 3; align-items: flex-end; } /* ロゴと競わないようラベルは右下 */
+.media--feature { aspect-ratio: 3 / 2; }
+.media--service {
+  aspect-ratio: 16 / 9;
+  border-radius: var(--media-radius);
+  background: linear-gradient(150deg, oklch(0.92 0.03 240), oklch(0.82 0.07 235));
+}
+.media-label {
+  position: relative;
+  z-index: 1;
   font-family: var(--font-mono);
   font-size: 10px;
   color: oklch(0.35 0.1 255);
   background: rgba(255, 255, 255, 0.7);
   padding: 3px 8px;
   border-radius: 4px;
+}
+
+/* 番号タブ：画像の左下に白いタブを食い込ませ、画像と本文を一つの面につなぐ。
+   タブと画像の境目は逆R（::after）で、画像側の角も丸く見せる */
+.num-tab {
+  --tab-r: 16px;       /* タブ肩と逆R の半径 */
+  --tab-overlap: 32px; /* 画像に食い込む深さ */
+  --tab-pad-x: 0px;    /* タブ左の余白（全幅画像では本文の左端に合わせる） */
+  position: relative;
+  z-index: 1;
+  align-self: flex-start;
+  margin-left: calc(var(--tab-pad-x) * -1);
+  padding: 12px 14px 0 var(--tab-pad-x);
+  background: var(--white);
+  border-top-right-radius: var(--tab-r);
+}
+.num-tab::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: calc(var(--tab-overlap) - var(--tab-r));
+  width: var(--tab-r);
+  height: var(--tab-r);
+  background: radial-gradient(circle at 100% 0, transparent calc(var(--tab-r) - 0.5px), var(--white) var(--tab-r));
 }
 
 /* --------------------------------------------------------------------------
@@ -236,9 +293,27 @@ a:hover { color: var(--blue-link-hover); }
   display: flex;
   flex-direction: column;
 }
-/* 社名はキービジュアルに重ねる（画像に焼き込まず、差し替えやすくする） */
+/* 社名はキービジュアルに重ねる（画像に焼き込まず、差し替えやすくする）。
+   どんな写真でも白いロゴが読めるよう、上端にだけ薄いスクリムを敷く */
 .hero-visual { position: relative; }
+.hero-visual::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 45%;
+  z-index: 1;
+  /* 直線的に消すと終端に帯が見えるので、イーズアウト状に減衰させる */
+  background: linear-gradient(
+    oklch(0.2 0.08 265 / 0.3),
+    oklch(0.2 0.08 265 / 0.21) 25%,
+    oklch(0.2 0.08 265 / 0.11) 50%,
+    oklch(0.2 0.08 265 / 0.04) 75%,
+    oklch(0.2 0.08 265 / 0)
+  );
+  pointer-events: none;
+}
 .hero-logo {
+  z-index: 2;
   position: absolute;
   top: 18px;
   left: var(--card-pad-x);
@@ -294,11 +369,27 @@ a:hover { color: var(--blue-link-hover); }
   padding: 20px 0 24px;
   border-bottom: 1px solid var(--line);
 }
+.service:last-child { border-bottom: none; padding-bottom: 8px; }
 .service-head {
   display: flex;
-  align-items: baseline;
-  gap: 10px;
-  padding-top: 6px;
+  flex-direction: column;
+  gap: 6px;
+}
+.service .num-tab {
+  --tab-r: var(--media-radius);
+  --tab-overlap: 26px;
+  margin-top: calc((var(--tab-overlap) + 10px) * -1); /* 10px = .service の gap */
+  padding: 10px 12px 0 0;
+}
+/* 角丸の画像の内側にタブが入るので、タブ肩の左側にも逆R を置いて画像の角を丸める */
+.service .num-tab::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  width: var(--tab-r);
+  height: var(--tab-r);
+  background: radial-gradient(circle at 100% 0, transparent calc(var(--tab-r) - 0.5px), var(--white) var(--tab-r));
 }
 .service-title {
   font-weight: 700;
@@ -360,7 +451,16 @@ a:hover { color: var(--blue-link-hover); }
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 24px var(--card-pad-x) 28px;
+  padding: 0 var(--card-pad-x) 28px;
+}
+.feature .num-tab {
+  --tab-r: 20px;
+  --tab-overlap: 36px;
+  --tab-pad-x: var(--card-pad-x);
+  margin-top: calc(var(--tab-overlap) * -1);
+  padding-top: 14px;
+  padding-right: 16px;
+  margin-bottom: 2px;
 }
 .feature-title {
   font-weight: 700;

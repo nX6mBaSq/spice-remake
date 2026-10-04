@@ -31,8 +31,11 @@
   <!-- ① ファーストビュー -->
   <section class="card hero js-fade">
     <div class="hero-visual">
-      <div class="ph ph--hero" role="img" aria-label="イメージ画像">
-        <span class="ph-label">HERO IMAGE 4:3</span>
+      <!-- TODO: 本番画像に差し替え。div の中に入れるだけでトリミングされる（role/aria-label とラベルは削除）
+           <img src="assets/img/hero.jpg" alt="" width="1440" height="1080" fetchpriority="high">
+           左上はロゴが重なるので、主題は中央〜右下に置く -->
+      <div class="media media--hero" role="img" aria-label="イメージ画像">
+        <span class="media-label">HERO 4:3 — 1440×1080</span>
       </div>
       <p class="hero-logo" lang="en">SP!CE WORKS</p>
     </div>
@@ -43,7 +46,9 @@
     </div>
   </section>
 
-  <!-- ② 事業内容 -->
+  <!-- ② 事業内容
+       画像：<img src="…" alt="…" width="1280" height="720" loading="lazy" decoding="async">
+       左下は番号タブが重なる -->
   <section class="section" id="business" aria-labelledby="business-title">
     <div class="section-head">
       <h2 class="section-en" id="business-title" lang="en">BUSINESS</h2>
@@ -52,20 +57,20 @@
     <div class="card business js-fade">
       <ul class="services">
         <li class="service">
-          <div class="ph ph--service" role="img" aria-label="グラフィックデザインのイメージ"><span class="ph-label">IMAGE 16:9</span></div>
-          <h3 class="service-head"><span class="num num--md">01</span><span class="service-title">グラフィック<wbr>デザイン</span></h3>
+          <div class="media media--service" role="img" aria-label="グラフィックデザインのイメージ"><span class="media-label">16:9 — 1280×720</span></div>
+          <h3 class="service-head"><span class="num num--md num-tab">01</span><span class="service-title">グラフィック<wbr>デザイン</span></h3>
           <p class="text text--tight">生成AIで素材をつくり、プロの手で商用品質のデザインに仕上げます。</p>
           <p class="service-items">バナー／<wbr>SNS画像／<wbr>チラシ／<wbr>名刺／<wbr>営業資料</p>
         </li>
         <li class="service">
-          <div class="ph ph--service" role="img" aria-label="動画制作・映像編集のイメージ"><span class="ph-label">IMAGE 16:9</span></div>
-          <h3 class="service-head"><span class="num num--md">02</span><span class="service-title">動画制作<span class="mid">・</span><wbr>映像編集</span></h3>
+          <div class="media media--service" role="img" aria-label="動画制作・映像編集のイメージ"><span class="media-label">16:9 — 1280×720</span></div>
+          <h3 class="service-head"><span class="num num--md num-tab">02</span><span class="service-title">動画制作<span class="mid">・</span><wbr>映像編集</span></h3>
           <p class="text text--tight">AI映像生成と編集技術で、SNS広告やショート動画をスピーディに。</p>
           <p class="service-items">SNS広告動画／<wbr>ショート動画</p>
         </li>
         <li class="service">
-          <div class="ph ph--service" role="img" aria-label="Webサイト・LP制作のイメージ"><span class="ph-label">IMAGE 16:9</span></div>
-          <h3 class="service-head"><span class="num num--md">03</span><span class="service-title">Webサイト<span class="mid">・</span><wbr>LP制作</span></h3>
+          <div class="media media--service" role="img" aria-label="Webサイト・LP制作のイメージ"><span class="media-label">16:9 — 1280×720</span></div>
+          <h3 class="service-head"><span class="num num--md num-tab">03</span><span class="service-title">Webサイト<span class="mid">・</span><wbr>LP制作</span></h3>
           <p class="text text--tight">構成からデザイン、実装・保守まで。AIツールを活用して短期間で形に。</p>
           <p class="service-items">構成／<wbr>デザイン／<wbr>実装／<wbr>保守</p>
         </li>
@@ -78,7 +83,9 @@
     </div>
   </section>
 
-  <!-- ③ 私たちの特長 -->
+  <!-- ③ 私たちの特長
+       画像：<img src="…" alt="…" width="1440" height="960" loading="lazy" decoding="async">
+       左下は番号タブが重なる -->
   <section class="section" id="features" aria-labelledby="features-title">
     <div class="section-head">
       <h2 class="section-en" id="features-title" lang="en">FEATURES</h2>
@@ -86,25 +93,25 @@
     </div>
     <ol class="features">
       <li class="card feature js-fade">
-        <div class="ph ph--feature" role="img" aria-label="イメージグラフィック"><span class="ph-label">GRAPHIC 4:3</span></div>
+        <div class="media media--feature" role="img" aria-label="イメージグラフィック"><span class="media-label">3:2 — 1440×960</span></div>
         <div class="feature-body">
-          <span class="num num--lg" aria-hidden="true">01</span>
+          <span class="num num--lg num-tab" aria-hidden="true">01</span>
           <h3 class="feature-title">現役<wbr>デザイナーが<wbr>手がける</h3>
           <p class="text">第一線で実務を続けるデザイナーが制作を担当。AIの出力をそのまま納品せず、構図・文字・色を整えて商用品質に仕上げます。</p>
         </div>
       </li>
       <li class="card feature js-fade">
-        <div class="ph ph--feature" role="img" aria-label="イメージグラフィック"><span class="ph-label">GRAPHIC 4:3</span></div>
+        <div class="media media--feature" role="img" aria-label="イメージグラフィック"><span class="media-label">3:2 — 1440×960</span></div>
         <div class="feature-body">
-          <span class="num num--lg" aria-hidden="true">02</span>
+          <span class="num num--lg num-tab" aria-hidden="true">02</span>
           <h3 class="feature-title">採用より<wbr>速く、<wbr>確実に</h3>
           <p class="text">AIとデザインの両方に通じた人材は、採用も育成も簡単ではありません。ご依頼いただいたその時から、即戦力として動きます。</p>
         </div>
       </li>
       <li class="card feature js-fade">
-        <div class="ph ph--feature" role="img" aria-label="イメージグラフィック"><span class="ph-label">GRAPHIC 4:3</span></div>
+        <div class="media media--feature" role="img" aria-label="イメージグラフィック"><span class="media-label">3:2 — 1440×960</span></div>
         <div class="feature-body">
-          <span class="num num--lg" aria-hidden="true">03</span>
+          <span class="num num--lg num-tab" aria-hidden="true">03</span>
           <h3 class="feature-title">最新ツールの<wbr>検証は、<wbr>私たちが</h3>
           <p class="text">日々進化するAIツールの情報収集と検証は、すべて当社が担当。貴社は手間をかけずに、成果物とノウハウだけを受け取れます。</p>
         </div>
