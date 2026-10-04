@@ -24,10 +24,11 @@
   --card-radius: 24px;
   --card-shadow: 0 8px 32px rgba(10, 20, 60, 0.18);
   --section-gap: clamp(72px, 20vw, 104px);
-  --card-pad-x: 20px;
+  --card-pad-x: 22px; /* 375px 幅で本文が 19 字詰め・字間 ≒0.05em になる値 */
 
   --font-en: "Archivo", sans-serif;
-  --font-ja: "Noto Sans JP", sans-serif;
+  /* Web フォント読み込み前・失敗時も、OS の上質な和文ゴシックで組む */
+  --font-ja: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "YuGothic", "Meiryo", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
 
@@ -47,13 +48,17 @@ body {
   font-family: var(--font-ja);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
-  line-break: strict; /* 行頭に小書き文字・約物を置かない */
+  line-break: strict; /* 行頭に小書き文字・長音・約物を置かない */
   overflow-wrap: anywhere;
+  text-autospace: normal; /* 和欧間に 1/8em のアキ（対応ブラウザのみ） */
+  text-spacing-trim: normal; /* 約物の連続（、「 など）を詰める */
   overflow-x: hidden;
 }
 
 h1, h2, h3, p, ul, ol, dl, dd { margin: 0; padding: 0; }
 ul, ol { list-style: none; }
+
+.nowrap { white-space: nowrap; }
 
 a { color: var(--blue-link); text-decoration: underline; }
 a:hover { color: var(--blue-link-hover); }
@@ -122,16 +127,22 @@ a:hover { color: var(--blue-link-hover); }
   line-height: 1;
 }
 
-/* 和文見出し：約物を詰め（palt）、文節で改行して行長をそろえる */
+/* 和文見出し：約物を詰め（palt）、<wbr> を置いた文節でのみ改行して行長をそろえる
+   （auto-phrase は Chrome 限定のため、keep-all + <wbr> で全ブラウザ同じ改行に） */
 .hero-catch,
 .section-ja,
 .service-title,
 .feature-title,
-.order-title {
+.order-title,
+.btn {
   font-feature-settings: "palt";
-  word-break: auto-phrase;
+  font-kerning: normal; /* 源ノ角系の kern はプロポーショナル組で効かせる前提 */
+  text-autospace: no-autospace; /* 詰め組の見出しでは和欧間アキが間延びして見える */
+  word-break: keep-all;
   text-wrap: balance;
 }
+/* palt で半角幅まで詰まる中黒に、わずかにアキを戻す */
+.mid { margin-inline: 0.12em; }
 .section-ja {
   font-weight: 700;
   font-size: clamp(18px, 5.2vw, 20px);
@@ -139,11 +150,13 @@ a:hover { color: var(--blue-link-hover); }
   letter-spacing: 0.06em;
 }
 
-/* 和文本文：両端揃えで行末のガタつきをなくす */
+/* 和文本文：ベタ組・両端揃え。
+   kern は「す。」などの字間を詰めて字送りを乱すので切る。
+   text-wrap: pretty は最終行調整で行を1字短く折り、その行を間延びさせるので使わない */
 .text,
 .order-text {
   text-align: justify;
-  text-wrap: pretty;
+  font-kerning: none;
 }
 .text {
   font-size: 15px;
@@ -153,9 +166,44 @@ a:hover { color: var(--blue-link-hover); }
 }
 .text--tight { line-height: 1.8; }
 
+/* 字送りグリッド：行長が字送りの整数倍でないと、端数を両端揃えが字間に配って
+   行ごとにアキがばらつく。行長 W を 15.6px（15px + 0.04em）に最も近い字送りで
+   N 字に割り切り、全行の文字が縦にもそろうようにする。
+   末尾の字のあとの字間ぶん右へ張り出し、最終字の字面を版面の右端にそろえる。
+   --n-adjust は main.js が段落末の泣き別れ回避に使う（+1 追い込み／−1 追い出し）。 */
+.hero-body,
+.business,
+.feature-body,
+.contact { container-type: inline-size; }
+
+@supports (width: 1cqi) {
+  .text {
+    --n: 14;
+    --cols: calc(var(--n) + var(--n-adjust, 0));
+    --tracking: calc((100cqi - 0.5px - var(--cols) * 1em) / (var(--cols) - 1));
+    letter-spacing: var(--tracking);
+    margin-inline-end: calc(var(--tracking) * -1);
+  }
+}
+/* 境界 = (N - 0.5) × 15.6px */
+@container (width >= 226.2px) { .text { --n: 15; } }
+@container (width >= 241.8px) { .text { --n: 16; } }
+@container (width >= 257.4px) { .text { --n: 17; } }
+@container (width >= 273px)   { .text { --n: 18; } }
+@container (width >= 288.6px) { .text { --n: 19; } }
+@container (width >= 304.2px) { .text { --n: 20; } }
+@container (width >= 319.8px) { .text { --n: 21; } }
+@container (width >= 335.4px) { .text { --n: 22; } }
+@container (width >= 351px)   { .text { --n: 23; } }
+@container (width >= 366.6px) { .text { --n: 24; } }
+@container (width >= 382.2px) { .text { --n: 25; } }
+@container (width >= 397.8px) { .text { --n: 26; } }
+@container (width >= 413.4px) { .text { --n: 27; } }
+
 .num {
   font-family: var(--font-en);
   font-weight: 900;
+  font-variant-numeric: tabular-nums; /* 01〜03 の字幅をそろえ、見出しの頭をそろえる */
   line-height: 1;
   color: var(--blue);
 }
@@ -259,6 +307,8 @@ a:hover { color: var(--blue-link-hover); }
   color: var(--ink);
 }
 .service-items {
+  font-feature-settings: "palt"; /* 全角スラッシュ前後の空きを詰める */
+  word-break: keep-all;
   font-size: 12px;
   line-height: 1.7;
   letter-spacing: 0.04em;
@@ -339,6 +389,12 @@ a:hover { color: var(--blue-link-hover); }
   color: var(--blue-link);
 }
 .company-row dd {
+  /* 「2 番 2 号」「2026 年」と数字まわりが空くのを避ける。
+     ideograph-alpha 対応ブラウザでは欧字のアキだけ残す */
+  text-autospace: no-autospace;
+  text-autospace: ideograph-alpha;
+  font-kerning: none;
+  word-break: keep-all;
   font-size: 15px;
   line-height: 1.75;
   letter-spacing: 0.04em;
