@@ -32,11 +32,9 @@
   <!-- ① ファーストビュー -->
   <section class="card hero js-fade">
     <div class="hero-visual">
-      <!-- TODO: 本番画像に差し替え。div の中に入れるだけでトリミングされる（role/aria-label とラベルは削除）
-           <img src="assets/img/hero.jpg" alt="" width="1440" height="1080" fetchpriority="high">
-           左上はロゴが重なるので、主題は中央〜右下に置く -->
-      <div class="media media--hero" role="img" aria-label="イメージ画像">
-        <span class="media-label">HERO 4:3 — 1440×1080</span>
+      <!-- 左上はロゴが重なるので、主題は中央〜右下に置く（ずれる場合は img に style="--focus: 70% 50%" で調整） -->
+      <div class="media media--hero">
+        <img src="assets/image/H01_hero_v01.png" alt="" width="1448" height="1086" fetchpriority="high">
       </div>
       <p class="hero-logo" lang="en">SP!CE WORKS</p>
     </div>
@@ -58,19 +56,19 @@
     <div class="card business js-fade">
       <ul class="services">
         <li class="service">
-          <div class="media media--service" role="img" aria-label="グラフィックデザインのイメージ"><span class="media-label">16:9 — 1280×720</span></div>
+          <div class="media media--service"><img src="assets/image/B01_graphic_v01.png" alt="グラフィックデザインのイメージ" width="1672" height="941" loading="lazy" decoding="async"></div>
           <h3 class="service-head"><span class="num num--md num-tab">01</span><span class="service-title">グラフィック<wbr>デザイン</span></h3>
           <p class="text text--tight">生成AIで素材をつくり、プロの手で商用品質のデザインに仕上げます。</p>
           <p class="service-items">バナー／<wbr>SNS画像／<wbr>チラシ／<wbr>名刺／<wbr>営業資料</p>
         </li>
         <li class="service">
-          <div class="media media--service" role="img" aria-label="動画制作・映像編集のイメージ"><span class="media-label">16:9 — 1280×720</span></div>
+          <div class="media media--service"><img src="assets/image/B02_video_v01.png" alt="動画制作・映像編集のイメージ" width="1672" height="941" loading="lazy" decoding="async"></div>
           <h3 class="service-head"><span class="num num--md num-tab">02</span><span class="service-title">動画制作<span class="mid">・</span><wbr>映像編集</span></h3>
           <p class="text text--tight">AI映像生成と編集技術で、SNS広告やショート動画をスピーディに。</p>
           <p class="service-items">SNS広告動画／<wbr>ショート動画</p>
         </li>
         <li class="service">
-          <div class="media media--service" role="img" aria-label="Webサイト・LP制作のイメージ"><span class="media-label">16:9 — 1280×720</span></div>
+          <div class="media media--service"><img src="assets/image/B03_web_v01.png" alt="Webサイト・LP制作のイメージ" width="1672" height="941" loading="lazy" decoding="async"></div>
           <h3 class="service-head"><span class="num num--md num-tab">03</span><span class="service-title">Webサイト<span class="mid">・</span><wbr>LP制作</span></h3>
           <p class="text text--tight">構成からデザイン、実装・保守まで。AIツールを活用して短期間で形に。</p>
           <p class="service-items">構成／<wbr>デザイン／<wbr>実装／<wbr>保守</p>
@@ -94,7 +92,7 @@
     </div>
     <ol class="features">
       <li class="card feature js-fade">
-        <div class="media media--feature" role="img" aria-label="イメージグラフィック"><span class="media-label">3:2 — 1440×960</span></div>
+        <div class="media media--feature"><img src="assets/image/F01_designer_v01.png" alt="" width="1536" height="1024" loading="lazy" decoding="async"></div>
         <div class="feature-body">
           <span class="num num--lg num-tab" aria-hidden="true">01</span>
           <h3 class="feature-title">現役<wbr>デザイナーが<wbr>手がける</h3>
@@ -102,7 +100,7 @@
         </div>
       </li>
       <li class="card feature js-fade">
-        <div class="media media--feature" role="img" aria-label="イメージグラフィック"><span class="media-label">3:2 — 1440×960</span></div>
+        <div class="media media--feature"><img src="assets/image/F02_team_v01.png" alt="" width="1536" height="1024" loading="lazy" decoding="async"></div>
         <div class="feature-body">
           <span class="num num--lg num-tab" aria-hidden="true">02</span>
           <h3 class="feature-title">採用より<wbr>速く、<wbr>確実に</h3>
@@ -110,7 +108,7 @@
         </div>
       </li>
       <li class="card feature js-fade">
-        <div class="media media--feature" role="img" aria-label="イメージグラフィック"><span class="media-label">3:2 — 1440×960</span></div>
+        <div class="media media--feature"><img src="assets/image/F03_validation_v01.png" alt="" width="1536" height="1024" loading="lazy" decoding="async"></div>
         <div class="feature-body">
           <span class="num num--lg num-tab" aria-hidden="true">03</span>
           <h3 class="feature-title">最新ツールの<wbr>検証は、<wbr>私たちが</h3>
