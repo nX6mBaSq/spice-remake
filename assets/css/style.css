@@ -520,6 +520,32 @@ a:hover { color: var(--blue-link-hover); }
   color: var(--ink);
 }
 
+/* 文字主体版（.features--text）：写真を隠し、大きな番号をグラフィックにする。
+   写真が続くページで「ここは読む場所」と切り替える。クラスを外せば写真版に戻る。
+   display: none の lazy 画像は読み込まれない */
+.features--text .media--feature { display: none; }
+.features--text .feature-body {
+  gap: 12px;
+  padding-top: 24px;
+}
+.features--text .num-tab {
+  margin: 0 0 2px;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+}
+.features--text .num-tab::after { content: none; }
+/* 番号は飾り（aria-hidden）なので淡くして、見出しより前に出ないようにする */
+.features--text .num {
+  font-size: 64px;
+  line-height: 0.8;
+  background: linear-gradient(110deg, color-mix(in oklch, var(--blue-500) 45%, var(--white)), color-mix(in oklch, var(--cyan-500) 35%, var(--white)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.features--text .feature-title { font-size: 23px; }
+
 /* --------------------------------------------------------------------------
    ④ Company
    -------------------------------------------------------------------------- */

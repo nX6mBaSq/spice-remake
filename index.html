@@ -83,14 +83,15 @@
   </section>
 
   <!-- ③ 私たちの特長
-       画像：<img src="…" alt="…" width="1440" height="960" loading="lazy" decoding="async">
-       左下は番号タブが重なる -->
+       文字主体版：.features--text を付けると画像を隠し、大きな番号を主役にする。
+       外せば写真版（画像の左下に番号タブが重なる）に戻る。
+       画像：<img src="…" alt="…" width="1440" height="960" loading="lazy" decoding="async"> -->
   <section class="section" id="features" aria-labelledby="features-title">
     <div class="section-head">
       <h2 class="section-en" id="features-title" lang="en">FEATURES</h2>
       <p class="section-ja">私たちの特長</p>
     </div>
-    <ol class="features">
+    <ol class="features features--text">
       <li class="card feature js-fade">
         <div class="media media--feature"><img src="assets/image/F01_designer_v01.png" alt="" width="1536" height="1024" loading="lazy" decoding="async"></div>
         <div class="feature-body">
